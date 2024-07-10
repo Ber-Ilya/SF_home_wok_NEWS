@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.text import slugify
+
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -48,6 +50,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     rating = models.IntegerField(default=0)
+    slug = models.SlugField(unique=True, blank=True)
 
     class Meta:
         verbose_name = "Публикация"
@@ -68,6 +71,11 @@ class Post(models.Model):
 
     def preview(self):
         return self.text[:124] + "..." if len(self.text) > 124 else self.text
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class PostCategory(models.Model):

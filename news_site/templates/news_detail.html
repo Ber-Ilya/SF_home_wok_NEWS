@@ -1,9 +1,14 @@
-<!-- your_app/templates/news_detail.html -->
-{% extends "default.html" %}
-{% load censor %}
-
+{% extends 'default.html' %}
+{% load static %}
+{% load NewsFilters %}
 {% block content %}
-    <h2>{{ post.title|censor  }}</h2>
-    <p>{{ post.created_at|date:"d.m.Y" }}</p>
-    <p>{{ post.text|censor  }}</p>
+    <h1>{{ news_detail.title }}</h1>
+    <p>{{ news_detail.text }}</p>
+    <p>Автор: {{ news_detail.author }}</p>
+    <p>Дата публикации: {{ news_detail.created_at }}</p>
+<form action="" method="get">
+    {{ form.as_p }}
+    <a href="{% url 'news_list' %}"><button type="button" class="btn btn-primary">Все новости</button></a>
+</form>
+
 {% endblock %}

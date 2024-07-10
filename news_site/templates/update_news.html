@@ -1,0 +1,12 @@
+<!-- news_site/templates/update_news.html -->
+{% extends 'default.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1>Редактировать новость</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+{% endblock %}

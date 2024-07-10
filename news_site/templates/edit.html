@@ -1,0 +1,12 @@
+<!-- news_site/templates/news_detail.html -->
+{% extends 'default.html' %}
+{% load static %}
+{% load NewsFilters %}
+{% block content %}
+<form action="" method="get">
+    {{ form.as_p }}
+
+    <input type="submit" value="Редактировать новость" />
+    <input type="submit" value="Удалить новость" />
+</form>
+{% endblock %}
